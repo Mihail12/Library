@@ -1,0 +1,22 @@
+{% extends "libapp/base.html" %}
+
+{% block content %}
+    <h1>Book List</h1>
+
+    {% if book_list %}
+    <table class="table">
+
+      {% for book in book_list %}
+      <tr>
+        <th><a href="{{ book.get_absolute_url }}">{{ book.title }}</a> 
+		{%if book.author %}({{book.author}}){% else %}(unknown author){% endif %}</th>
+		<th><a href="{% url 'book_update' book.id %}">Update</a></th>
+		<th><a href="{% url 'book_delete' book.id %}">Delete</a></th>
+      </tr>
+      {% endfor %}
+
+    </table>
+    {% else %}
+      <p>There are no books in the library.</p>
+    {% endif %}       
+{% endblock %}
